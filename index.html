@@ -18,7 +18,7 @@
 }
 :root[data-theme="dark"]{
   --bg:#0d1526;--grid:#18243d;--ink:#eaf0ff;--mute:#9db0d3;--card:#14203a;--line:#27385d;
-  --blue:#7c9bff;--sun:#ffc533;--mint:#3dd6b5;--code:#09101f;--codefg:#dbe6ff;
+  --blue:#7c9bff;--sun:#2F5BFF;--mint:#3dd6b5;--code:#09101f;--codefg:#dbe6ff;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
@@ -43,7 +43,8 @@ h1 span{background:linear-gradient(transparent 62%,var(--sun) 62%)}
 .btn{display:inline-block;padding:12px 22px;border-radius:12px;background:var(--blue);color:#fff;font-weight:600;text-decoration:none;border:0;transition:transform .15s}
 :root[data-theme="dark"] .btn{color:#0d1526}
 .btn:hover{transform:translateY(-2px)}
-.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink);margin-left:8px}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink);margin-left:8px } 
+  :root[data-theme="dark"] .btn.alt{color:#fff}
 .browser{background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:8px 8px 0 var(--ink);overflow:hidden}
 .chrome{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:2px solid var(--ink);background:var(--bg)}
 .chrome i{width:11px;height:11px;border-radius:50%;background:var(--ink);opacity:.25}
@@ -96,7 +97,7 @@ footer{padding:40px 0 60px;color:var(--mute);font-size:15px;border-top:2px solid
   .hero,.steps,.why .row{grid-template-columns:1fr}
   .tabs{flex-direction:row;overflow-x:auto}
   .tab{white-space:nowrap}.tab[aria-selected="true"]{transform:none}
-  nav a{display:none}.btn.alt{margin:10px 0 0}
+  nav a{display:none}.btn.alt{margin:10px 0 0 }
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -104,7 +105,7 @@ footer{padding:40px 0 60px;color:var(--mute);font-size:15px;border-top:2px solid
 <body>
 <div id="bar"></div>
 <header><div class="wrap"><nav>
-  <b>sitebuilder - made by Mohamed for AP Seminar</b>
+  <b>sitebuilder</b>
   <a href="#why">Why</a><a href="#how">How</a><a href="#check">Checklist</a><a href="#faq">FAQ</a>
   <button class="icon" id="theme" aria-label="Switch light or dark theme">◐</button>
 </nav></div></header>
@@ -125,6 +126,10 @@ footer{padding:40px 0 60px;color:var(--mute);font-size:15px;border-top:2px solid
     </div>
   </div>
 </div>
+
+<p class="lead">Making a website has long been an endeavor many people have wanted to do, but never gotten around to doing it. So on Genius Wednesday, I chose <br>
+ to learn how to make a website. I believe that this is a very important thing to learn to do to be able to get your name out online, build a presence and become
+successful. So, I decided to make a website that will help others in making their own website, just like this one. It is not as complicated as it seems on the surface! </p>
 
 <section id="why">
   <h2>Why make a website?</h2>
@@ -171,7 +176,7 @@ footer{padding:40px 0 60px;color:var(--mute);font-size:15px;border-top:2px solid
 </section>
 </main>
 
-<footer><div class="wrap">Made as a class project. Copy this file, change the words, and make it yours.</div></footer>
+<footer><div class="wrap">View the source code of this website <u><a href="https://github.com/MohamedPro123/school-website/blob/main/index.html">here!<br></a></u>   </div></footer>
 
 <script>
 const $=s=>document.querySelector(s);
