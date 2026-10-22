@@ -1,1 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make a Website with GitHub Pages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef3fa;--grid:#d6e0ef;--ink:#14213d;--mute:#4b5b78;--card:#ffffff;--line:#c9d5e8;
+  --blue:#2f5bff;--sun:#ffb703;--mint:#16a085;--code:#101a30;--codefg:#dbe6ff;
+  --f:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1526;--grid:#18243d;--ink:#eaf0ff;--mute:#9db0d3;--card:#14203a;--line:#27385d;
+  --blue:#7c9bff;--sun:#ffc533;--mint:#3dd6b5;--code:#09101f;--codefg:#dbe6ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:var(--f);font-size:18px;line-height:1.6;color:var(--ink);background:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;transition:background-color .3s,color .3s}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--blue),var(--sun));z-index:30}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:18px;height:58px}
+nav b{font-weight:800;font-size:19px;margin-right:auto;letter-spacing:-.02em}
+nav a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:600}
+nav a:hover{color:var(--blue)}
+button{font:inherit;cursor:pointer}
+.icon{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:999px;width:38px;height:38px}
+.hero{padding:64px 0 40px;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
+h1{font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.04em;font-weight:800;margin:0 0 18px}
+h1 span{background:linear-gradient(transparent 62%,var(--sun) 62%)}
+.lead{color:var(--mute);max-width:44ch;margin:0 0 26px}
+.btn{display:inline-block;padding:12px 22px;border-radius:12px;background:var(--blue);color:#fff;font-weight:600;text-decoration:none;border:0;transition:transform .15s}
+:root[data-theme="dark"] .btn{color:#0d1526}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink);margin-left:8px}
+.browser{background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+.chrome{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:2px solid var(--ink);background:var(--bg)}
+.chrome i{width:11px;height:11px;border-radius:50%;background:var(--ink);opacity:.25}
+.url{flex:1;font:13px var(--m);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+textarea{display:block;width:100%;height:150px;border:0;resize:vertical;background:var(--code);color:var(--codefg);font:13px/1.5 var(--m);padding:12px}
+iframe{display:block;width:100%;height:170px;border:0;background:#fff}
+.presets{display:flex;gap:8px;padding:8px 12px;border-top:2px solid var(--ink);flex-wrap:wrap;align-items:center;font-size:14px}
+.presets button{border:1px solid var(--ink);background:var(--card);color:var(--ink);border-radius:8px;padding:3px 10px}
+.presets button:hover{background:var(--sun);color:#14213d}
+section{padding:70px 0}
+h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.03em;line-height:1.1;margin:0 0 30px;font-weight:800}
+.why{border-top:2px solid var(--ink)}
+.why .row{display:grid;grid-template-columns:1fr 1.2fr;gap:30px;padding:26px 0;border-bottom:1px solid var(--line)}
+.why h3{margin:0;font-size:26px;letter-spacing:-.02em;line-height:1.15}
+.why p{margin:0;color:var(--mute);max-width:56ch}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.stat{flex:1 1 180px;background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:16px 18px}
+.stat b{display:block;font-size:40px;line-height:1;letter-spacing:-.03em;color:var(--blue)}
+.stat span{color:var(--mute);font-size:15px}
+.steps{display:grid;grid-template-columns:280px 1fr;gap:26px;align-items:start}
+.tabs{display:flex;flex-direction:column;gap:8px}
+.tab{text-align:left;padding:12px 14px;background:var(--card);border:2px solid var(--line);border-radius:12px;color:var(--ink);font-weight:600;display:flex;gap:10px;align-items:center;transition:all .15s}
+.tab em{font:500 13px var(--m);width:26px;height:26px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font-style:normal;flex:none}
+.tab[aria-selected="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg);transform:translateX(6px)}
+.panel{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:26px;box-shadow:8px 8px 0 var(--ink);min-height:330px}
+.panel[hidden]{display:none}
+.panel h3{margin:0 0 8px;font-size:26px;letter-spacing:-.02em}
+.panel p{margin:0 0 14px;color:var(--mute)}
+.panel ol{padding-left:20px;margin:0 0 14px}
+.who{display:flex;gap:10px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+.who input{font:16px var(--m);padding:8px 12px;border-radius:10px;border:2px solid var(--ink);background:var(--card);color:var(--ink);width:220px}
+.codebox{position:relative;background:var(--code);color:var(--codefg);border-radius:10px;padding:14px 70px 14px 14px;font:13px/1.55 var(--m);overflow-x:auto;white-space:pre}
+.copy{position:absolute;top:8px;right:8px;background:var(--sun);color:#14213d;border:0;border-radius:8px;padding:3px 10px;font:600 12px var(--f)}
+.nav2{display:flex;justify-content:space-between;margin-top:18px}
+.nav2 button{background:none;border:0;color:var(--blue);font-weight:600;padding:4px}
+.nav2 button:disabled{opacity:.3;cursor:default}
+.check{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:22px}
+.meter{height:12px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 18px}
+.meter div{height:100%;width:0;background:var(--mint);transition:width .4s}
+.check label{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line);cursor:pointer;align-items:center}
+.check input{width:20px;height:20px;accent-color:var(--blue);flex:none}
+.check input:checked+span{text-decoration:line-through;color:var(--mute)}
+#done{font-weight:800;color:var(--mint);min-height:1.6em;margin:12px 0 0}
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{font-weight:600;cursor:pointer;font-size:19px}
+details p{color:var(--mute);margin:10px 0 0;max-width:62ch}
+footer{padding:40px 0 60px;color:var(--mute);font-size:15px;border-top:2px solid var(--ink)}
+@media(max-width:860px){
+  .hero,.steps,.why .row{grid-template-columns:1fr}
+  .tabs{flex-direction:row;overflow-x:auto}
+  .tab{white-space:nowrap}.tab[aria-selected="true"]{transform:none}
+  nav a{display:none}.btn.alt{margin:10px 0 0}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header><div class="wrap"><nav>
+  <b>sitebuilder - made by Mohamed for AP Seminar</b>
+  <a href="#why">Why</a><a href="#how">How</a><a href="#check">Checklist</a><a href="#faq">FAQ</a>
+  <button class="icon" id="theme" aria-label="Switch light or dark theme">◐</button>
+</nav></div></header>
 
+<main class="wrap">
+<div class="hero">
+  <div>
+    <h1>Build a website <span>today.</span> Host it free.</h1>
+    <p class="lead">GitHub Pages turns a plain text file into a real website with its own link. Try it on the right: edit the code and watch the page change.</p>
+    <a class="btn" href="#how">Show me how</a><a class="btn alt" href="#why">Why bother?</a>
+  </div>
+  <div class="browser">
+    <div class="chrome"><i></i><i></i><i></i><div class="url" id="url">https://yourname.github.io</div></div>
+    <textarea id="code" spellcheck="false" aria-label="Edit the HTML code"></textarea>
+    <iframe id="out" title="Live preview" sandbox></iframe>
+    <div class="presets">Start from:
+      <button data-p="0">Intro</button><button data-p="1">Club page</button><button data-p="2">Dark mode</button>
+    </div>
+  </div>
+</div>
+
+<section id="why">
+  <h2>Why make a website?</h2>
+  <div class="why">
+    <div class="row"><h3>You own it</h3><p>Social apps change their rules and layouts. A website is yours: you pick how it looks, what it says, and where it lives.</p></div>
+    <div class="row"><h3>It shows your work</h3><p>Colleges, teams, and employers can open one link and see your projects, art, or writing. That is stronger than a list on a form.</p></div>
+    <div class="row"><h3>You learn real skills</h3><p>HTML, CSS, and JavaScript run almost everything you use online. Every page you make teaches you how the web is built.</p></div>
+    <div class="row"><h3>It costs nothing</h3><p>GitHub Pages hosts public sites for free, with a secure https link and no ads added to your pages.</p></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b data-to="0" data-pre="$">$0</b><span>to host a site</span></div>
+    <div class="stat"><b data-to="3">3</b><span>languages: HTML, CSS, JS</span></div>
+    <div class="stat"><b data-to="5">5</b><span>steps to go live</span></div>
+    <div class="stat"><b data-to="10" data-suf=" min">10 min</b><span>to your first version</span></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>How to put a site on GitHub Pages</h2>
+  <div class="who"><label for="user">Your GitHub username:</label><input id="user" placeholder="yourname" maxlength="39" autocomplete="off"></div>
+  <div class="steps">
+    <div class="tabs" role="tablist" aria-label="Steps"></div>
+    <div id="panels"></div>
+  </div>
+</section>
+
+<section id="check">
+  <h2>Your launch checklist</h2>
+  <div class="check">
+    <b id="count">0 of 5 done</b>
+    <div class="meter"><div id="fill"></div></div>
+    <div id="list"></div>
+    <p id="done" aria-live="polite"></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions people ask</h2>
+  <details><summary>Do I need to know how to code?</summary><p>No. Start with the Intro in the editor above and change the words. You will pick up HTML and CSS by editing things and seeing what changes.</p></details>
+  <details><summary>Is GitHub Pages really free?</summary><p>Yes, for public repositories on a free account. Sites have size and traffic limits, but a school project or portfolio is far below them.</p></details>
+  <details><summary>My page shows 404. What now?</summary><p>Check that the file is named exactly <code>index.html</code> in lowercase, that it is in the main folder, and that Pages is turned on under Settings. Then wait a couple of minutes and refresh.</p></details>
+  <details><summary>How do I change my site later?</summary><p>Open <code>index.html</code> in your repository, click the pencil icon, edit, and commit. GitHub rebuilds the site automatically.</p></details>
+  <details><summary>Can I use my own domain name?</summary><p>Yes. Pages supports custom domains in the same Settings page, though you pay a domain seller for the name itself.</p></details>
+</section>
+</main>
+
+<footer><div class="wrap">Made as a class project. Copy this file, change the words, and make it yours.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* theme */
+const root=document.documentElement;
+const saved=store.get("theme");
+root.dataset.theme=saved||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+$("#theme").onclick=()=>{const t=root.dataset.theme==="dark"?"light":"dark";root.dataset.theme=t;store.set("theme",t)};
+
+/* scroll progress */
+addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  $("#bar").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+},{passive:true});
+
+/* live editor */
+const presets=[
+`<style>
+  body{font-family:sans-serif;background:#fff7e0;padding:18px}
+  h1{color:#2f5bff;margin:0}
+</style>
+<h1>Hi, I'm _____!</h1>
+<p>This is my first website. I like _____.</p>
+<button onclick="alert('You clicked me!')">Click me</button>`,
+`<style>
+  body{font-family:Georgia,serif;margin:0}
+  header{background:#16a085;color:#fff;padding:16px 20px}
+  main{padding:14px 20px}
+  li{margin:4px 0}
+</style>
+<header><h1>Soccer Club</h1></header>
+<main><p>Join the Soccer Club.</p>
+<ul><li>Get coaching from pros</li><li>Cleats provided</li></ul></main>`,
+`<style>
+  body{background:#0d1526;color:#eaf0ff;font-family:monospace;padding:18px}
+  h1{color:#2F5BFF}
+  a{color:#7c9bff}
+</style>
+<h1>my.portfolio()</h1>
+<p>Projects loading...</p>
+<a href="#">View my work</a>`
+];
+const code=$("#code"),out=$("#out");
+const render=()=>{out.srcdoc=code.value};
+code.value=presets[0];render();
+code.addEventListener("input",render);
+document.querySelectorAll(".presets button").forEach(b=>b.onclick=()=>{code.value=presets[b.dataset.p];render()});
+
+/* steps */
+const steps=[
+ {t:"Make a GitHub account",d:"Go to github.com and choose Sign up. Pick a username you are happy to show publicly, because it becomes part of your web address.",c:()=>"https://github.com"},
+ {t:"Create a repository",d:"A repository is a folder that lives on GitHub. Click New, then use these settings:",l:["Name it exactly the text below","Set it to Public","Tick Add a README file","Click Create repository"],c:u=>u+".github.io"},
+ {t:"Add your index.html",d:"In your repository click Add file, then Create new file. Name it index.html, paste your code, and click Commit changes. Here is a starter:",c:u=>`<!DOCTYPE html>
+<html>
+<head><title>${u}'s site</title></head>
+<body>
+  <h1>Hello, I'm ${u}!</h1>
+  <p>My first GitHub Pages site.</p>
+</body>
+</html>`},
+ {t:"Turn on Pages",d:"If your site is not already published, open it in Settings:",l:["Click Settings, then Pages","Under Build and deployment pick Deploy from a branch","Choose main and /(root)","Click Save"],c:()=>"Settings > Pages > Deploy from a branch > main /(root)"},
+ {t:"Visit your site",d:"Wait one or two minutes, then open your new address. Every time you commit a change, GitHub updates the site by itself.",c:u=>`https://${u}.github.io`}
+];
+const tabs=document.querySelector(".tabs"),panels=$("#panels");
+let user="yourname",cur=0;
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function drawSteps(){
+  tabs.innerHTML="";panels.innerHTML="";
+  steps.forEach((s,i)=>{
+    const b=document.createElement("button");
+    b.className="tab";b.role="tab";b.setAttribute("aria-selected",i===cur);
+    b.innerHTML=`<em>${i+1}</em>${s.t}`;
+    b.onclick=()=>{cur=i;drawSteps()};
+    tabs.appendChild(b);
+  });
+  const s=steps[cur],text=s.c(user);
+  const p=document.createElement("div");p.className="panel";p.setAttribute("role","tabpanel");
+  p.innerHTML=`<h3>${s.t}</h3><p>${s.d}</p>`+(s.l?`<ol>${s.l.map(x=>`<li>${x}</li>`).join("")}</ol>`:"")+
+   `<div class="codebox">${esc(text)}<button class="copy">Copy</button></div>
+    <div class="nav2"><button ${cur?"":"disabled"} id="prev">Back</button><button ${cur<4?"":"disabled"} id="next">Next step</button></div>`;
+  panels.appendChild(p);
+  p.querySelector(".copy").onclick=e=>{
+    navigator.clipboard.writeText(text).then(()=>{e.target.textContent="Copied";setTimeout(()=>e.target.textContent="Copy",1500)},()=>{e.target.textContent="Press Ctrl+C"});
+  };
+  $("#prev").onclick=()=>{cur--;drawSteps()};
+  $("#next").onclick=()=>{cur++;drawSteps()};
+}
+$("#user").addEventListener("input",e=>{
+  user=e.target.value.trim().replace(/[^a-zA-Z0-9-]/g,"")||"yourname";
+  $("#url").textContent=`https://${user}.github.io`;
+  drawSteps();
+});
+drawSteps();
+
+/* checklist */
+const items=["Made a GitHub account","Created a repository named username.github.io","Added and committed index.html","Turned on GitHub Pages","Opened my live site and shared the link"];
+const done=JSON.parse(store.get("done")||"[]");
+const list=$("#list");
+items.forEach((t,i)=>{
+  const l=document.createElement("label");
+  l.innerHTML=`<input type="checkbox" ${done.includes(i)?"checked":""}><span>${t}</span>`;
+  l.firstChild.onchange=e=>{
+    const k=done.indexOf(i);
+    if(e.target.checked&&k<0)done.push(i);
+    if(!e.target.checked&&k>=0)done.splice(k,1);
+    store.set("done",JSON.stringify(done));update();
+  };
+  list.appendChild(l);
+});
+function update(){
+  $("#count").textContent=`${done.length} of ${items.length} done`;
+  $("#fill").style.width=(done.length/items.length*100)+"%";
+  $("#done").textContent=done.length===items.length?"Your site is live. Nice work!":"";
+}
+update();
+
+/* count-up stats */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;io.unobserve(e.target);
+  const el=e.target,to=+el.dataset.to,pre=el.dataset.pre||"",suf=el.dataset.suf||"";
+  let n=0;const tick=()=>{n+=Math.max(1,to/20);if(n>=to)n=to;el.textContent=pre+Math.round(n)+suf;if(n<to)requestAnimationFrame(tick)};tick();
+}),{threshold:.6});
+document.querySelectorAll("[data-to]").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
